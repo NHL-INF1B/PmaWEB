@@ -1,5 +1,5 @@
 <?php
-require_once "functions.php";
+require_once "function.php";
 $_SESSION['projectId'] = "";
 
 $error = array();
@@ -16,23 +16,24 @@ if (isset($_POST['login'])) {
                 WHERE email =?";
 
         $stmt = mysqli_prepare($conn, $sql) or die("prepare error");
-        mysqli_stmt_bind_param($stmt, 's', $email) or die("bind param error");
+        mysqli_stmt_bind_param($stmt, 's', $inputEmail) or die("bind param error");
         mysqli_stmt_execute($stmt) or die("execute error");
         mysqli_stmt_bind_result($stmt, $id, $email, $password);
         mysqli_stmt_store_result($stmt);
 
+        $error[] = mysqli_stmt_num_rows($stmt);
         if (mysqli_stmt_num_rows($stmt) == 1) {
             while (mysqli_stmt_fetch($stmt)) {
                 if (password_verify($inputPassword, $password)) {
                     $_SESSION['userId'] = $id;
-                    header("location: index.php");
+                    header("location: ../index.php");
                     exit;
                 } else {
-                    $error[] = "De inloggegevens zijn verkeerd.";
+                    $error[] = "De inloggegevens zijn 1.";
                 }
             }
         } else {
-            $error[] = "De inloggegevens zijn verkeerd.";
+            $error[] = "De inloggegevens zijn verkeerd.2";
         }
         mysqli_stmt_close($stmt);
         dbClose($conn);
