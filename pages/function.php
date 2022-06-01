@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-function checkLogin(string $email, string $password)
-{
+function checkLogin(string $email, string $password) {
     $error = array();
 
     if (!$email && empty($email)) {
@@ -18,18 +17,21 @@ function checkLogin(string $email, string $password)
     }
 }
 
-function dbConnect()
-{
-    require_once('env.dist.php');
-    $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD);
-    if (mysqli_connect_errno() > 0) {
-        die("Failed to connect to MySQL: " . mysqli_connect_error());
+function connectDB() {
+    //Require ENV
+    require_once('../env.php');
+
+    // Connect to server (localhost server)
+    $conn = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+
+    // Test the connection
+    if (!$conn) {
+        echo "database_connect_error";
     }
-    mysqli_select_db($connection, DATABASE);
-    return $connection;
+
+    return $conn;
 }
 
-function dbClose(mysqli $connection)
-{
+function dbClose(mysqli $connection) {
     mysqli_close($connection);
 }

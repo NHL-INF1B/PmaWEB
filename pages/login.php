@@ -1,6 +1,5 @@
 <?php
 require_once "function.php";
-$_SESSION['projectId'] = "";
 
 $error = array();
 
@@ -9,7 +8,7 @@ if (isset($_POST['login'])) {
     $inputPassword = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (!checkLogin($inputEmail, $inputPassword)) {
-        $conn = dbConnect();
+        $conn = connectDB();
 
         $sql = "SELECT id, email, password
                 FROM user 
@@ -25,8 +24,8 @@ if (isset($_POST['login'])) {
         if (mysqli_stmt_num_rows($stmt) == 1) {
             while (mysqli_stmt_fetch($stmt)) {
                 if (password_verify($inputPassword, $password)) {
-                    $_SESSION['userId'] = $id;
-                    header("location: ../index.php");
+                    $_SESSION['id'] = $id;
+                    header("location: add.php?projectid=".$_SESSION['projectid']."&token=".$_SESSION['token']."");
                     exit;
                 } else {
                     $error[] = "De inloggegevens zijn 1.";
@@ -43,11 +42,7 @@ if (isset($_POST['login'])) {
         $_SESSION['ERROR_MESSAGE'] = $error;
     }
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -63,12 +58,6 @@ if (isset($_POST['login'])) {
 
 <section id="content" class="container mb-3">
     <div class="height">
-        <div class="row">
-            <div class="col-md-12 text-center mt-2">
-                <h1>Inloggen</h1>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-md-6 text-center mt-2">
                 <?php
