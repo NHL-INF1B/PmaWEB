@@ -73,7 +73,7 @@ if (isset($_GET['projectid']) && isset($_GET['token'])) {
             }
         } else {
             //header to login
-            header("location: login.php");
+            header("location: login.php?projectid=".$_SESSION['projectid']."&token=".$_SESSION['token']."");
         }
     } else {
         echo 'Security warning';
