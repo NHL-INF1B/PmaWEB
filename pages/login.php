@@ -47,9 +47,7 @@ if (isset($_POST['login'])) {
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 
 <body>
@@ -81,31 +79,31 @@ if (isset($_POST['login'])) {
                 }
                 ?>
 
-                <div class="box row rounded">
-                    <div class="col-md-12">
-                        <h2 class="form-heading mt-3">Inloggen</h2>
-                        <form class="mb-3" action="<?= htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-                            <div class="form-group">
-                                <input class="form-control mt-2" placeholder="Gebruikersnaam" type="text"
+                <div class="container">
+                    <div class="login-form">
+                        <h2>Inloggen</h2>
+                        <form action="<?= htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+                            <div class="form">
+                                <input class="input" placeholder="Gebruikersnaam" type="text"
                                        name="username" value="<?php if (isset($_POST['login'])) {
                                     echo htmlentities($_POST['username']);
                                 } ?>">
-                                <input class="form-control mt-3" placeholder="Wachtwoord" type="password"
+                                <input class="input" placeholder="Wachtwoord" type="password"
                                        name="password">
-                                <input class="btn btn-danger mt-3" type="submit" name="login" value="Inloggen">
+                                <input class="button" type="submit" name="login" value="Inloggen">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 text-center mt-2">
+            <div>
                 <?php
                 if (isset($_POST['register']) && !empty($_SESSION['ERROR_MESSAGE'])) {
                     ?>
-                    <div class="row">
-                        <div class="col-md-12 p-0">
-                            <div class="alert alert-danger text-black fw-bold p-4 rounded mb-3" role="alert">
+                    <div>
+                        <div>
+                            <div role="alert">
                                 <ul>
                                     <?php
                                     foreach ($_SESSION['ERROR_MESSAGE'] as $errorMsg) {
