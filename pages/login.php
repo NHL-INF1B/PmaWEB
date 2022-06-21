@@ -28,11 +28,11 @@ if (isset($_POST['login'])) {
                     header("location: add.php?projectid=".$_SESSION['projectid']."&token=".$_SESSION['token']."");
                     exit;
                 } else {
-                    $error[] = "De inloggegevens zijn 1.";
+                    $error[] = "De inloggegevens zijn incorrect";
                 }
             }
         } else {
-            $error[] = "De inloggegevens zijn verkeerd.2";
+            $error[] = "De inloggegevens zijn incorrect";
         }
         mysqli_stmt_close($stmt);
         dbClose($conn);
