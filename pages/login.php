@@ -84,7 +84,7 @@ if (isset($_POST['login'])) {
                         <h2>Inloggen</h2>
                         <form action="<?= htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                             <div class="form">
-                                <input class="input" placeholder="Gebruikersnaam" type="text"
+                                <input class="input" placeholder="Emailadres" type="text"
                                        name="username" value="<?php if (isset($_POST['login'])) {
                                     echo htmlentities($_POST['username']);
                                 } ?>">
